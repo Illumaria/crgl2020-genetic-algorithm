@@ -8,11 +8,15 @@ import numpy as np
 cdef int calc_neighs(unsigned char[:, :] field, int i, int j, int n, int k):
     cdef:
         int neighs = 0;
-        int i_min = (i == 0) ? (n - 1) : (i - 1);
-        int i_pl = (i == n - 1) ? (0) : (i + 1);
-        int j_min = (j == 0) ? (k - 1) : (j - 1);
-        int j_pl = (j == k - 1) ? (0) : (j + 1);
+        int i_min = 0;
+        int i_pl = 0;
+        int j_min = 0;
+        int j_pl = 0;
     neighs = 0
+    i_min = n - 1 if i == 0 else i - 1
+    i_pl = 0 if i == n - 1 else i + 1
+    j_min = k - 1 if j == 0 else j - 1
+    j_pl = 0 if j == k - 1 else j + 1
     if i_min >= 0:
         if j_min >= 0:
             neighs += field[i_min, j_min]
