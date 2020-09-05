@@ -14,7 +14,7 @@ class SolutionRunner:
   def solve_df(self, df, first_n=None, save_to=None):
     solver = MPGeneticSolver(early_stopping=False)
     
-    solution_df = pd.DataFrame([], columns=['id', 'score'] + ['start.'+ str(_) for _ in range(1, 401)], dtype=int)
+    solution_df = pd.DataFrame([], columns=['id', 'score'] + ['start_'+ str(_) for _ in range(625)], dtype=int)
     for col in solution_df.columns:
       solution_df[col] = solution_df[col].astype(np.int32)
     
@@ -23,7 +23,7 @@ class SolutionRunner:
     self.log = []
     best, worst = None, None
     for i, (id, (idx, row)) in enumerate(zip(df.index, df.iterrows())):
-        delta, Y = row.values[0], row.values[1:].reshape((20, 20)).astype('uint8')
+        delta, Y = row.values[0], row.values[1:].reshape((25, 25)).astype('uint8')
         solution = solver.solve(Y, delta, return_all=False)
 
         board, score = solution

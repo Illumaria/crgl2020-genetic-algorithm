@@ -30,7 +30,7 @@ class MPGeneticSolver:
     def solve(self, Y, delta, return_all=True):
         """
         Solve RGoL problem
-        :param Y: 20x20 array that represents field in stopping condition
+        :param Y: 25x25 array that represents field in stopping condition
         :param delta: number of steps to revert
         :param return_all: if True, returns all of the results from different runners, as well as their scores.
                            If False only solution associated with the best score is returned
@@ -46,7 +46,7 @@ class MPGeneticSolver:
         """
         Using output of solve method, select the best solution
         :param solutions: list of (solution, score) pairs
-        :return: 20x20 array that represents the solution (starting board condition)
+        :return: 25x25 array that represents the solution (starting board condition)
         """
         return sorted(solutions, key=lambda x:x[1], reverse=True)[0]
 
