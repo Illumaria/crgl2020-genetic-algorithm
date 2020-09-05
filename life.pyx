@@ -8,10 +8,10 @@ import numpy as np
 cdef int calc_neighs(unsigned char[:, :] field, int i, int j, int n, int k):
     cdef:
         int neighs = 0;
-        int i_min = i - 1;
-        int i_pl = i + 1;
-        int j_min = j - 1;
-        int j_pl = j + 1;
+        int i_min = (i == 0) ? (n - 1) : (i - 1);
+        int i_pl = (i == n - 1) ? (0) : (i + 1);
+        int j_min = (j == 0) ? (k - 1) : (j - 1);
+        int j_pl = (j == k - 1) ? (0) : (j + 1);
     neighs = 0
     if i_min >= 0:
         if j_min >= 0:
@@ -75,4 +75,4 @@ cpdef make_move(unsigned char[:, :] field, int moves):
 @cython.nonecheck(False)
 @cython.wraparound(False)
 cpdef float fitness_score(unsigned char[:, :] gene, unsigned char[:, :]Y, int delta):
-    return (make_move(gene, moves=delta) == Y).sum() / 400.0
+    return (make_move(gene, moves=delta) == Y).sum() / 625.0
